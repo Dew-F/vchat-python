@@ -4,7 +4,7 @@ from typing import Annotated
 from fastapi import Depends
 from sqlalchemy.orm import Session
 
-from app.db.engine import engine
+from app.core.db.engine import engine
 
 
 def get_session() -> Generator[Session, None, None]:

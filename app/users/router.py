@@ -1,7 +1,7 @@
 from fastapi import APIRouter, status
 
-from app.db.session import SessionDep
-from app.users.model import UserCreate, UserPublic
+from app.core.db.session import SessionDep
+from app.users.schemas import UserCreate, UserPublic
 from app.users.service import UserService
 
 router = APIRouter(prefix="/api/v1/users", tags=["users"])

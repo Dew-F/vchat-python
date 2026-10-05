@@ -1,8 +1,8 @@
 from fastapi import APIRouter, status
 
-from app.channels.model import ChannelCreate, ChannelPublic
+from app.channels.schemas import ChannelCreate, ChannelPublic
 from app.channels.service import ChannelService
-from app.db.session import SessionDep
+from app.core.db.session import SessionDep
 
 router = APIRouter(prefix="/api/v1/channel", tags=["channel"])
 

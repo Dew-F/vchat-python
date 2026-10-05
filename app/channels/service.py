@@ -1,8 +1,9 @@
-from sqlmodel import Session
+from sqlalchemy.orm import Session
 
 from app.channels.errors import ChannelAlreadyExistsError, ChannelNotFoundError
-from app.channels.model import Channel, ChannelCreate
+from app.channels.models import Channel
 from app.channels.repository import ChannelRepository
+from app.channels.schemas import ChannelCreate
 
 
 class ChannelService:
@@ -17,6 +18,9 @@ class ChannelService:
 
             channel = Channel(
                 name=data.name,
+                is_voice=data.is_voice,
+                is_private=data.is_private,
+                is_direct=data.is_direct,
             )
 
             self.repository.add(channel)

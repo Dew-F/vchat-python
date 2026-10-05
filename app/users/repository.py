@@ -1,6 +1,7 @@
-from sqlmodel import Session, select
+from sqlalchemy import select
+from sqlalchemy.orm import Session
 
-from app.users.model import User
+from app.users.models import User
 
 
 class UserRepository:
@@ -10,17 +11,17 @@ class UserRepository:
     def get_by_id(self, user_id: int) -> User | None:
         statement = select(User).where(User.id == user_id)
 
-        return self.session.exec(statement).first()
+        return self.session.execute(statement).scalar_one_or_none()
 
     def get_by_email(self, email: str) -> User | None:
         statement = select(User).where(User.email == email)
 
-        return self.session.exec(statement).first()
+        return self.session.execute(statement).scalar_one_or_none()
 
     def get_by_username(self, name: str) -> User | None:
         statement = select(User).where(User.username == name)
 
-        return self.session.exec(statement).first()
+        return self.session.execute(statement).scalar_one_or_none()
 
     def add(self, user: User) -> None:
         self.session.add(user)

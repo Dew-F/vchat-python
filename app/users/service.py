@@ -1,7 +1,8 @@
-from sqlmodel import Session
+from sqlalchemy.orm import Session
 
 from app.users.errors import UserAlreadyExistsError, UserNotFoundError
-from app.users.model import User, UserCreate
+from app.users.models import User
+from app.users.schemas import UserCreate
 from app.users.password import hash_password
 from app.users.repository import UserRepository
 
