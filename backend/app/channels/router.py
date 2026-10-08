@@ -4,7 +4,7 @@ from app.channels.schemas import ChannelCreate, ChannelPublic
 from app.channels.service import ChannelService
 from app.core.db.session import SessionDep
 
-router = APIRouter(prefix="/api/v1/channel", tags=["channel"])
+router = APIRouter(prefix="/api/v1/channels", tags=["channel"])
 
 
 @router.post("", response_model=ChannelPublic, status_code=status.HTTP_201_CREATED)

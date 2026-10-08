@@ -8,8 +8,8 @@ from alembic import context
 from app.core.config import settings
 from app.core.db.base import Base
 
-from app.users import models as _users_models
-from app.channels import models as _channels_models
+from app.users import models as _users_models  # noqa: F401
+from app.channels import models as _channels_models  # noqa: F401
 
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.

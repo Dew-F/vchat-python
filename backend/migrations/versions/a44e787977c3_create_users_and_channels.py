@@ -1,8 +1,8 @@
 """create users and channels
 
-Revision ID: d6a14b8fff02
+Revision ID: a44e787977c3
 Revises: 
-Create Date: 2026-10-05 13:13:27.687496
+Create Date: 2026-10-05 17:31:11.744744
 
 """
 from typing import Sequence, Union
@@ -12,7 +12,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision: str = 'd6a14b8fff02'
+revision: str = 'a44e787977c3'
 down_revision: Union[str, Sequence[str], None] = None
 branch_labels: Union[str, Sequence[str], None] = None
 depends_on: Union[str, Sequence[str], None] = None
@@ -27,7 +27,7 @@ def upgrade() -> None:
     sa.Column('is_voice', sa.Boolean(), nullable=False),
     sa.Column('is_private', sa.Boolean(), nullable=False),
     sa.Column('is_direct', sa.Boolean(), nullable=False),
-    sa.Column('created_at', sa.DateTime(timezone=True), server_default=sa.text('(CURRENT_TIMESTAMP)'), nullable=False),
+    sa.Column('created_at', sa.DateTime(timezone=True), server_default=sa.text('now()'), nullable=False),
     sa.PrimaryKeyConstraint('id')
     )
     op.create_index(op.f('ix_channels_name'), 'channels', ['name'], unique=True)
@@ -36,7 +36,7 @@ def upgrade() -> None:
     sa.Column('username', sa.String(length=20), nullable=False),
     sa.Column('email', sa.String(length=100), nullable=False),
     sa.Column('password_hash', sa.String(length=255), nullable=False),
-    sa.Column('created_at', sa.DateTime(timezone=True), server_default=sa.text('(CURRENT_TIMESTAMP)'), nullable=False),
+    sa.Column('created_at', sa.DateTime(timezone=True), server_default=sa.text('now()'), nullable=False),
     sa.PrimaryKeyConstraint('id')
     )
     op.create_index(op.f('ix_users_email'), 'users', ['email'], unique=True)

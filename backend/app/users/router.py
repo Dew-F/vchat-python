@@ -1,6 +1,8 @@
-from fastapi import APIRouter, status
+from fastapi import APIRouter, Depends, status
 
+from app.auth.deps import get_current_user
 from app.core.db.session import SessionDep
+from app.users.models import User
 from app.users.schemas import UserCreate, UserPublic
 from app.users.service import UserService
 
@@ -11,6 +13,11 @@ router = APIRouter(prefix="/api/v1/users", tags=["users"])
 def create_user(data: UserCreate, session: SessionDep):
     service = UserService(session)
     return service.create_user(data)
+
+
+@router.get("/me", response_model=UserPublic)
+def get_me(user: User = Depends(get_current_user)):
+    return user
 
 
 @router.get("/{user_id}", response_model=UserPublic)
